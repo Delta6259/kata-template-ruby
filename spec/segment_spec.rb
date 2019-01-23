@@ -1,14 +1,48 @@
 require 'rspec'
 require 'segment'
 
-RSpec.describe "paths" do
-  context "a horizontal segment" do
-    it "computes length" do
-      segment = Segment.new(from: Point.new(x: 0, y: 0), to: Point.new(x: 0, y: 1))
-      expect(segment.distance).to eq 1
+RSpec.describe "Ruby kata" do
+  context "A Segment" do
+    context "horizontal" do
+      it "computes length" do
+        segment = Segment.new(from: Point.new(x: 0, y: 0), to: Point.new(x: 1, y: 0))
+        expect(segment.distance).to eq 1
+      end
+    end
 
-      segment = Segment.new(from: Point.new(x: 0, y: 0), to: Point.new(x: 1, y: 1))
-      expect(segment.distance).to be_within(0.001).of(1.414)
+    context "trivial" do
+      it "computes length" do
+        segment = Segment.new(from: Point.new(x: 0, y: 0), to: Point.new(x: 0, y: 0))
+        expect(segment.distance).to eq 0
+      end
+    end
+
+    context "vertical" do
+      it "computes length" do
+        segment = Segment.new(from: Point.new(x: 0, y: 1), to: Point.new(x: 0, y: 2))
+        expect(segment.distance).to eq 1
+      end
+    end
+
+    context "general" do
+      it "computes length" do
+        segment = Segment.new(from: Point.new(x: 1, y: 1), to: Point.new(x: 2, y: 2))
+        expect(segment.distance).to be_within(0.001).of(1.414)
+      end
     end
   end
+
+  context "Paths" do
+    context "wich is empty" do
+
+    end
+
+    context "wich contains a single segment" do
+    end
+
+    context "wich contains two segments" do
+    end
+  end
+
+
 end
