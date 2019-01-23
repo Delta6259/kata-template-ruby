@@ -50,7 +50,6 @@ RSpec.describe "Paths" do
         segment_2_to = Point.new(x: 2, y: 0)
         segment_2 = Segment.new(from: segment_2_from, to: segment_2_to)
 
-
         stops = Path.new(segments: [segment_1, segment_2]).stops
         expect(stops).to match_array([segment_1_from, segment_1_to, segment_2_from, segment_2_to])
       end

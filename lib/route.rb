@@ -13,4 +13,13 @@ class Route
       nil
     end
   end
+
+  def crossed_paths(crossing_point)
+    # TODO : to finish
+
+
+    @paths.select { |path|
+      path.segments.include?()
+    }
+  end
 end

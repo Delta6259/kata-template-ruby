@@ -10,6 +10,11 @@ RSpec.describe "Route" do
       route = Route.new()
       expect(route.shortest_path).to eq nil
     end
+
+    it 'should render no crossed_paths' do
+      route = Route.new()
+      expect(route.crossed_paths(crossing_point: Point.new(x: 0, y: 0))).to eq []
+    end
   end
 
   context "Wich contains only empty paths" do
@@ -28,6 +33,16 @@ RSpec.describe "Route" do
 
       route = Route.new(paths: [path])
       expect(route.shortest_path).to eq path
+    end
+
+    it 'should no render crossed paths because they are not crossed by stop' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
+      path = Path.new(segments: [segment_1, segment_2])
+
+      route = Route.new(paths: [path])
+
+      expect(route.crossed_paths(Point.new(x: 5, y: 5))).to eq []
     end
   end
 
