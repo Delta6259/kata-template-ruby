@@ -13,4 +13,8 @@ class Path
       0
     end
   end
+
+  def stops
+    @segments.map { |segment| [segment.from, segment.to] }.flatten
+  end
 end

@@ -16,7 +16,7 @@ RSpec.describe "Route" do
     it 'should render the shortest path' do
       path = Path.new(segments: [])
       route = Route.new(paths: [path])
-      expect(route.shortest_path).to eq nil
+      expect(route.shortest_path).to eq path
     end
   end
 
