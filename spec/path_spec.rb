@@ -3,8 +3,8 @@ require 'path'
 require 'segment'
 require 'point'
 
-RSpec.describe "Ruby kata" do
-  context "A Path" do
+RSpec.describe "Paths" do
+  context "For a single path" do
     context "wich is empty" do
       it 'should render length' do
         length = Path.new(segments: []).length
