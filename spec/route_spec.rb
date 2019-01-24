@@ -20,6 +20,11 @@ RSpec.describe "Route" do
       route = Route.new()
       expect(route.required_points_paths(crossing_points: [Point.new(x: 0, y: 0), Point.new(x: 1, y: 0)])).to eq []
     end
+
+    it 'should render no shortest_path_with_stops' do
+      route = Route.new()
+      expect(route.shortest_path_with_stops(crossing_points: [Point.new(x: 0, y: 0), Point.new(x: 1, y: 0)])).to eq []
+    end
   end
 
   context "Wich contains only empty paths" do

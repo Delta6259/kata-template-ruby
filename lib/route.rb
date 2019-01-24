@@ -1,6 +1,8 @@
 class Route
   attr_reader :paths
 
+  # Je sens qu'il va falloir faire des fonctions d'ordre supérieur :)
+
   def initialize(paths: [])
     @paths = paths
     freeze
@@ -25,6 +27,22 @@ class Route
         crossing_points.include?(segment.to)
       }
     }
+  end
+
+  def shortest_path_with_stops(crossing_points:)
+    # prendre en compte le cas dans lequel il n'y a qu'un path qui n'a pas tous les points
+    paths = @paths.select { |path|
+      path.segments.any? { |segment|
+        crossing_points.include?(segment.from)
+        crossing_points.include?(segment.to)
+      }
+    }.min_by(&:length)
+
+    if paths == nil
+      []
+    else
+      paths
+    end
   end
 
 end
