@@ -35,14 +35,24 @@ RSpec.describe "Route" do
       expect(route.shortest_path).to eq path
     end
 
-    it 'should no render crossed paths because they are not crossed by stop' do
+    it 'should no render crossed path because it is not crossed by stop' do
       segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
       segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
       path = Path.new(segments: [segment_1, segment_2])
 
       route = Route.new(paths: [path])
 
-      expect(route.crossed_paths(Point.new(x: 5, y: 5))).to eq []
+      expect(route.crossed_paths(crossing_point: Point.new(x: 5, y: 5))).to eq []
+    end
+
+    it 'should ender crossed path because it is crossed by stop' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
+      path = Path.new(segments: [segment_1, segment_2])
+
+      route = Route.new(paths: [path])
+
+      expect(route.crossed_paths(crossing_point: Point.new(x: 3, y: 3))).to eq [path]
     end
   end
 

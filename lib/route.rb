@@ -14,12 +14,18 @@ class Route
     end
   end
 
-  def crossed_paths(crossing_point)
-    # TODO : to finish
+  def crossed_paths(crossing_point:)
+    # TODO : Réussir à rendre ça immutable
+    result = []
 
+    @paths.each do |path|
+      path.segments.each do |segment|
+        if crossing_point == segment.from || crossing_point == segment.to
+          result.push(path)
+        end
+      end
+    end
+    result
 
-    @paths.select { |path|
-      path.segments.include?()
-    }
   end
 end
