@@ -15,6 +15,11 @@ RSpec.describe "Route" do
       route = Route.new()
       expect(route.crossed_paths(crossing_point: Point.new(x: 0, y: 0))).to eq []
     end
+
+    it 'should render no required_points_paths' do
+      route = Route.new()
+      expect(route.required_points_paths(crossing_points: [Point.new(x: 0, y: 0), Point.new(x: 1, y: 0)])).to eq []
+    end
   end
 
   context "Wich contains only empty paths" do
@@ -45,14 +50,28 @@ RSpec.describe "Route" do
       expect(route.crossed_paths(crossing_point: Point.new(x: 5, y: 5))).to eq []
     end
 
-    it 'should ender crossed path because it is crossed by stop' do
+    it 'should render crossed path because it is crossed by stop' do
       segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
       segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
       path = Path.new(segments: [segment_1, segment_2])
-
       route = Route.new(paths: [path])
-
       expect(route.crossed_paths(crossing_point: Point.new(x: 3, y: 3))).to eq [path]
+    end
+
+    it 'should not render required_points_paths' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
+      path = Path.new(segments: [segment_1, segment_2])
+      route = Route.new(paths: [path])
+      expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), Point.new(x: 9, y: 9)])).to eq []
+    end
+
+    it 'should not render required_points_paths' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
+      path = Path.new(segments: [segment_1, segment_2])
+      route = Route.new(paths: [path])
+      expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 3)])).to eq []
     end
   end
 

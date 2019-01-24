@@ -11,11 +11,20 @@ class Route
   end
 
   def crossed_paths(crossing_point:)
-    @paths.select do |path|
-      path.segments.any? do |segment|
+    @paths.select { |path|
+      path.segments.any? { |segment|
         crossing_point == segment.from || crossing_point == segment.to
-      end
-    end
+      }
+    }
+  end
+
+  def required_points_paths(crossing_points:)
+    @paths.select { |path|
+      path.segments.any? { |segment|
+        crossing_points.include?(segment.from)
+        crossing_points.include?(segment.to)
+      }
+    }
   end
 
 end
