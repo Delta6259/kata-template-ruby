@@ -9,12 +9,19 @@ class PathFactory
     if segments == nil || segments == []
       []
     else
-      # calculer
+
+
 
     end
   end
 
-  def best_path(segments:, stops:)
-  end
+  private
 
+  def make_path(path_list)
+    if path_list.length == 0
+      0
+    else
+      head of array + sum_array(tail of array)
+    end
+  end
 end
