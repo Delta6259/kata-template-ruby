@@ -41,9 +41,4 @@ class Route
     def render_shortest_path(paths)
       paths.min_by(&:length)
     end
-
-    def check_segment_condition()
-
-    end
-
 end
