@@ -63,7 +63,7 @@ RSpec.describe "Route" do
       expect(route.crossed_paths(crossing_point: Point.new(x: 3, y: 3))).to eq [path]
     end
 
-    it 'should not render required_points_paths' do
+    it 'should not render required_points_paths because the path has not all required points' do
       segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
       segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
       path = Path.new(segments: [segment_1, segment_2])
@@ -76,7 +76,7 @@ RSpec.describe "Route" do
       segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
       path = Path.new(segments: [segment_1, segment_2])
       route = Route.new(paths: [path])
-      expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 3)])).to eq [path]
+      expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), Point.new(x: 3, y: 3)])).to eq [path]
     end
 
 

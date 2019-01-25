@@ -21,8 +21,8 @@ class Route
   def required_points_paths(crossing_points:)
     @paths.select { |path|
       path.segments.any? { |segment|
-        crossing_points.include?(segment.from)
-        crossing_points.include?(segment.from)
+        p crossing_points.include?(segment.from)
+        p crossing_points.include?(segment.to)
       }
     }
   end
