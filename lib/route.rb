@@ -22,26 +22,17 @@ class Route
     @paths.select { |path|
       path.segments.any? { |segment|
         crossing_points.include?(segment.from)
-        crossing_points.include?(segment.to)
+        crossing_points.include?(segment.from)
       }
     }
   end
 
   def shortest_path_with_stops(crossing_points:)
-    # prendre en compte le cas dans lequel il n'y a qu'un path qui n'a pas tous les points
-
-
-    paths = @paths.select { |path|
-      path.segments.any? { |segment|
-        crossing_points.include?(segment.from)
-        crossing_points.include?(segment.to)
-      }
-    }.min_by(&:length)
-
-    if paths == nil
-      []
-    else
+    paths = required_points_paths(crossing_points: crossing_points)
+    if paths.count == 0
       paths
+    else
+      paths.min_by(&:length)
     end
   end
 

@@ -76,8 +76,10 @@ RSpec.describe "Route" do
       segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
       path = Path.new(segments: [segment_1, segment_2])
       route = Route.new(paths: [path])
-      expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 3)])).to eq []
+      expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 3)])).to eq [path]
     end
+
+
   end
 
   context "Wich contains 2 paths" do
