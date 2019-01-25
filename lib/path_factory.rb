@@ -1,4 +1,4 @@
-class Pathlist
+class PathFactory
 
   def initialize(from:, to:)
     @from = from
