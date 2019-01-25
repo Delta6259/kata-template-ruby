@@ -1,11 +1,12 @@
 class Pathlist
 
-  def initialize(segments:)
-    @segments = segments
+  def initialize(from:, to:)
+    @from = from
+    @to = to
   end
 
-  def all_possible_paths
-    if @segments == nil || @segments == []
+  def all_possible_paths(segments:)
+    if segments == nil || segments == []
       []
     else
       # calculer
