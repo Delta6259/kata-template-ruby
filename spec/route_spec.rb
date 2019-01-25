@@ -79,7 +79,31 @@ RSpec.describe "Route" do
       expect(route.required_points_paths(crossing_points: [Point.new(x: 2, y: 1), Point.new(x: 3, y: 3)])).to eq [path]
     end
 
+    it 'should not render shortest_path_with_stops because it not has all required points' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 6))
+      path = Path.new(segments: [segment_1, segment_2])
+      route = Route.new(paths: [path])
+      expect(route.shortest_path_with_stops(crossing_points: [Point.new(x: 2, y: 1), Point.new(x: 3, y: 3)])).to eq []
+    end
 
+    it 'should render shortest_path_with_stops because it has all required points' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
+      segment_3 = Segment.new(from: Point.new(x: 3, y: 3), to: Point.new(x: 3, y: 10))
+      path_1 = Path.new(segments: [segment_1, segment_3])
+      path_2 = Path.new(segments: [segment_1, segment_2])
+      route = Route.new(paths: [path_1, path_2])
+      expect(route.shortest_path_with_stops(crossing_points: [Point.new(x: 2, y: 1), Point.new(x: 3, y: 3)])).to eq path_2
+    end
+
+    it 'should render shortest_path_with_stops because it has all required points (One path)' do
+      segment_1 = Segment.new(from: Point.new(x: 2, y: 1), to: Point.new(x: 3, y: 1))
+      segment_2 = Segment.new(from: Point.new(x: 3, y: 1), to: Point.new(x: 3, y: 3))
+      path = Path.new(segments: [segment_1, segment_2])
+      route = Route.new(paths: [path])
+      expect(route.shortest_path_with_stops(crossing_points: [Point.new(x: 2, y: 1), Point.new(x: 3, y: 3)])).to eq path
+    end
   end
 
   context "Wich contains 2 paths" do
