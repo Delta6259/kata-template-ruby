@@ -2,11 +2,14 @@ require 'rspec'
 require 'path'
 require 'segment'
 require 'point'
+require 'path_list'
 
 RSpec.describe "PathList" do
-  context "when there is no segment" do
-    it 'should return the best path' do
 
+  context "when there is no segment" do
+    it 'should not return the best path' do
+      path_list = Pathlist.new(segments: nil)
+      expect(path_list.all_possible_paths).to eq []
     end
   end
 
