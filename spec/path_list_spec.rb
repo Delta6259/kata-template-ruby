@@ -8,7 +8,7 @@ RSpec.describe "PathList" do
 
   context "when there is no segment" do
     it 'should not return the best path' do
-      path_list = PathFactory.new
+      path_list = PathFactory.new(from: Point.new(x: 0, y: 0), to: Point.new(x: 1, y: 0))
       expect(path_list.all_possible_paths(segments: nil)).to eq []
     end
   end
