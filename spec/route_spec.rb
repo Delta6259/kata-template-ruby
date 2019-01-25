@@ -8,7 +8,7 @@ RSpec.describe "Route" do
   context "Wich contains empty list of paths" do
     it 'should render nil in place of shortest path' do
       route = Route.new()
-      expect(route.shortest_path).to eq nil
+      expect(route.shortest_route_path).to eq nil
     end
 
     it 'should render no crossed_paths' do
@@ -31,7 +31,7 @@ RSpec.describe "Route" do
     it 'should render the shortest path' do
       path = Path.new(segments: [])
       route = Route.new(paths: [path])
-      expect(route.shortest_path).to eq path
+      expect(route.shortest_route_path).to eq path
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe "Route" do
       path = Path.new(segments: [segment_1, segment_2])
 
       route = Route.new(paths: [path])
-      expect(route.shortest_path).to eq path
+      expect(route.shortest_route_path).to eq path
     end
 
     it 'should no render crossed path because it is not crossed by stop' do
@@ -118,7 +118,7 @@ RSpec.describe "Route" do
       shortest_path = Path.new(segments: [path_2_segment_1, path_2_segment_2])
 
       route = Route.new(paths: [longest_path, shortest_path])
-      expect(route.shortest_path).to eq shortest_path
+      expect(route.shortest_route_path).to eq shortest_path
     end
   end
 end

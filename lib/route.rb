@@ -6,12 +6,12 @@ class Route
     freeze
   end
 
-  def shortest_path
-    @paths.min_by(&:length)
+  def shortest_route_path
+    render_shortest_path(self.paths)
   end
 
   def crossed_paths(crossing_point:)
-    @paths.select { |path|
+    self.paths.select { |path|
       path.segments.any? { |segment|
         crossing_point == segment.from || crossing_point == segment.to
       }
@@ -19,7 +19,7 @@ class Route
   end
 
   def required_points_paths(crossing_points:)
-    @paths.select { |path|
+    self.paths.select { |path|
       path.segments.any? { |segment|
         crossing_points.include?(segment.from)
         crossing_points.include?(segment.to)
@@ -32,8 +32,18 @@ class Route
     if paths.count == 0
       paths
     else
-      paths.min_by(&:length)
+      render_shortest_path(paths)
     end
   end
+
+  private
+
+    def render_shortest_path(paths)
+      paths.min_by(&:length)
+    end
+
+    def check_segment_condition()
+
+    end
 
 end
