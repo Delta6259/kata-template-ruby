@@ -1,4 +1,8 @@
 class PathFactory
+  attr_reader :from
+  attr_reader :to
+  attr_reader :segments
+
 
   def initialize(from:, to:, segments:)
     @from = from
@@ -7,18 +11,12 @@ class PathFactory
   end
 
 
-  def possible_paths(starting_point, ending_point, segments, valid_paths = [])
-    if segments.length == 0 && valid_paths.length == 0
+  def possible_paths(starting_point, ending_point, segments, paths = [])
+    if segments.length == 0 && paths.length == 0
       []
     else
-      case segment[0].from
-      when starting_point
-        # On commence une nouvelle branche depuis le départ
-        if segment[0].to == ending_point
-          possible_paths(starting_point, ending_point, segments.drop(1), valid_paths << Path.new(segments: segments[0]))
-        end
-      else
-        # On
+      if segments[0].from == starting_point && segments[0].to == ending_point
+        Path.new(segments: [segments[0]])
       end
     end
   end
